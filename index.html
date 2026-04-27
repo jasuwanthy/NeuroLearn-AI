@@ -1,1 +1,152 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuronest</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #00f5d4;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00f5d4;
+        }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .hero h2 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #00f5d4;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #00c9a7;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            width: 250px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Neuronest</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Your Mind, Your Space 🧠</h2>
+    <p>Neuronest helps you learn, focus, and grow in your own unique way.</p>
+    <button class="btn">Get Started</button>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>🧠 Smart Learning</h3>
+        <p>Adaptive content tailored to your brain style.</p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Focus Mode</h3>
+        <p>Minimal distractions with deep work environment.</p>
+    </div>
+
+    <div class="card">
+        <h3>🌈 Personalization</h3>
+        <p>Customize your learning journey completely.</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Neuronest. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
