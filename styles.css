@@ -1,1 +1,2578 @@
+* ══════════════════════════════════════════
+   NeuroLearn Pro — Complete Stylesheet
+   Apple + Calm + Notion inspired
+══════════════════════════════════════════ */
+
+/* ── GOOGLE FONTS IMPORT (simulated OpenDyslexic) ── */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS VARIABLES ── */
+:root {
+  /* Global */
+  --bg: #0e0e14;
+  --surface: rgba(255,255,255,0.05);
+  --surface-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.1);
+  --text: #e8e8f0;
+  --text-muted: rgba(232,232,240,0.55);
+  --radius: 18px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-sm: 0 4px 16px rgba(0,0,0,0.25);
+  --font: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ADHD Colors */
+  --adhd-primary: #FF6B35;
+  --adhd-secondary: #FFB347;
+  --adhd-accent: #FF4D6D;
+  --adhd-glow: rgba(255, 107, 53, 0.3);
+  --adhd-bg: rgba(255, 107, 53, 0.05);
+
+  /* Dyslexia Colors */
+  --dyslexia-primary: #7C5CBF;
+  --dyslexia-secondary: #A78BFA;
+  --dyslexia-accent: #DDD6FE;
+  --dyslexia-bg: rgba(124, 92, 191, 0.05);
+  --dyslexia-glow: rgba(124, 92, 191, 0.3);
+
+  /* Autism Colors */
+  --autism-primary: #2D9C7F;
+  --autism-secondary: #4ECDC4;
+  --autism-accent: #A8EDEA;
+  --autism-green: #2D9C7F;
+  --autism-glow: rgba(45, 156, 127, 0.3);
+  --autism-bg: rgba(45, 156, 127, 0.05);
+}
+
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── AMBIENT BACKGROUND ── */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #FF6B35 0%, transparent 70%);
+  top: -200px; left: -200px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #7C5CBF 0%, transparent 70%);
+  top: 50%; right: -150px;
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #2D9C7F 0%, transparent 70%);
+  bottom: -100px; left: 40%;
+  animation-delay: -8s;
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  33% { transform: translateY(-40px) scale(1.05); }
+  66% { transform: translateY(20px) scale(0.95); }
+}
+
+/* ── APP ROOT ── */
+#app-root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ── PAGE SYSTEM ── */
+.page {
+  display: none;
+  min-height: 100vh;
+  animation: pageFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page.active { display: block; }
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── GLASS COMPONENTS ── */
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.glass-card:hover {
+  background: rgba(255,255,255,0.075);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* ── TOP NAV ── */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-size: 1.2rem;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #FF6B35, #7C5CBF, #2D9C7F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-text strong { font-weight: 700; }
+
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  padding: 10px 22px;
+  border-radius: 50px;
+  border: none;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  background: linear-gradient(135deg, #FF6B35, #FF4D6D);
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+}
+
+.btn-ghost {
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.btn-ghost.small { padding: 6px 14px; font-size: 0.8rem; }
+
+.full-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: white;
+  background: rgba(255,255,255,0.15);
+  margin-top: 8px;
+}
+
+.full-btn:hover { transform: translateY(-1px); }
+
+.adhd-btn { background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-accent)) !important; }
+.adhd-btn:hover { box-shadow: 0 6px 20px var(--adhd-glow); }
+
+.dyslexia-btn { background: linear-gradient(135deg, var(--dyslexia-primary), var(--dyslexia-secondary)) !important; }
+.dyslexia-btn:hover { box-shadow: 0 6px 20px var(--dyslexia-glow); }
+
+.autism-btn { background: linear-gradient(135deg, var(--autism-primary), var(--autism-secondary)) !important; }
+.autism-btn:hover { box-shadow: 0 6px 20px var(--autism-glow); }
+
+/* ── LANDING HERO ── */
+.hero-section {
+  padding: 60px 32px 40px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF4D6D 30%, #7C5CBF 60%, #2D9C7F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── MODE CARDS ── */
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.mode-card {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+}
+
+.mode-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.card-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: inherit;
+}
+
+.mode-card:hover .card-glow { opacity: 1; }
+
+.adhd-glow { background: radial-gradient(ellipse at top left, rgba(255,107,53,0.2) 0%, transparent 60%); }
+.dyslexia-glow { background: radial-gradient(ellipse at top left, rgba(124,92,191,0.2) 0%, transparent 60%); }
+.autism-glow { background: radial-gradient(ellipse at top left, rgba(45,156,127,0.2) 0%, transparent 60%); }
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.card-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.adhd-card .card-badge { color: var(--adhd-primary); }
+.dyslexia-card .card-badge { color: var(--dyslexia-secondary); }
+.autism-card .card-badge { color: var(--autism-secondary); }
+
+.mode-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.mode-card p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.card-features span {
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.card-cta {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: white;
+}
+
+.adhd-cta { background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-accent)); }
+.adhd-cta:hover { box-shadow: 0 8px 24px var(--adhd-glow); }
+
+.dyslexia-cta { background: linear-gradient(135deg, var(--dyslexia-primary), var(--dyslexia-secondary)); }
+.dyslexia-cta:hover { box-shadow: 0 8px 24px var(--dyslexia-glow); }
+
+.autism-cta { background: linear-gradient(135deg, var(--autism-primary), var(--autism-secondary)); }
+.autism-cta:hover { box-shadow: 0 8px 24px var(--autism-glow); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 20px 32px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 28px;
+}
+
+.stat strong {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FF6B35, #7C5CBF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+.stat-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255,255,255,0.12);
+}
+
+/* ══════════════ MODE NAV ══════════════ */
+.mode-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mode-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.back-btn {
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.back-btn:hover { background: rgba(255,255,255,0.08); }
+
+/* ══════════════ ADHD LAYOUT ══════════════ */
+.adhd-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.adhd-left, .adhd-center, .adhd-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Coach Card */
+.coach-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.coach-avatar {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-accent));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.coach-content { flex: 1; }
+
+.coach-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--adhd-primary);
+}
+
+.coach-message {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.coach-btn {
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid var(--adhd-primary);
+  background: transparent;
+  color: var(--adhd-primary);
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.coach-btn:hover { background: var(--adhd-primary); color: white; }
+
+/* Missions */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.card-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.missions-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.08);
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+
+.missions-list { display: flex; flex-direction: column; gap: 8px; }
+
+.mission-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mission-item:hover { background: rgba(255,255,255,0.08); }
+
+.mission-item.completed { opacity: 0.5; }
+.mission-item.completed .mission-status { color: #4CAF50; }
+
+.mission-icon { font-size: 1.2rem; }
+
+.mission-info { flex: 1; }
+
+.mission-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.mission-reward {
+  font-size: 0.72rem;
+  color: var(--adhd-secondary);
+  font-weight: 600;
+}
+
+.mission-status {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* Distraction Tracker */
+.distraction-score {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.focus-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.1);
+  stroke-width: 8;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: var(--adhd-primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 251;
+  stroke-dashoffset: 38;
+  transition: stroke-dashoffset 1s;
+}
+
+.ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.ring-label small {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.distraction-log {
+  margin-top: 10px;
+}
+
+.log-empty {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 10px;
+}
+
+/* XP Display in Nav */
+.xp-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.xp-flame { font-size: 1.2rem; }
+
+.streak-badge {
+  background: linear-gradient(135deg, #FF6B35, #FF4D6D);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+}
+
+/* Pomodoro */
+.pomodoro-card { text-align: center; }
+
+.pomodoro-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.pomodoro-header h3 { font-size: 0.95rem; font-weight: 700; }
+
+.pomodoro-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--adhd-primary);
+  background: rgba(255,107,53,0.1);
+  padding: 3px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+.pomodoro-timer {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+
+.pomodoro-progress { margin-bottom: 16px; }
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 1s linear;
+}
+
+.adhd-progress { background: linear-gradient(90deg, var(--adhd-primary), var(--adhd-secondary)); }
+.dyslexia-progress { background: linear-gradient(90deg, var(--dyslexia-primary), var(--dyslexia-secondary)); }
+.autism-progress { background: linear-gradient(90deg, var(--autism-primary), var(--autism-secondary)); }
+
+.pomodoro-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.session-info {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+/* Task Chunker */
+.task-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.task-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.task-input:focus {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+}
+
+.task-input::placeholder { color: var(--text-muted); }
+
+.task-chunks { display: flex; flex-direction: column; gap: 8px; }
+
+.chunk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.chunk-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.chunk-text {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chunk-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chunk-check.done {
+  background: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.two-min-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: var(--radius);
+  border: 2px dashed var(--adhd-primary);
+  background: rgba(255,107,53,0.08);
+  color: var(--adhd-primary);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.two-min-btn:hover {
+  background: rgba(255,107,53,0.15);
+  transform: scale(1.02);
+}
+
+.two-min-icon { font-size: 1.2rem; }
+
+/* Hyperfocus Bar */
+.hyperfocus-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,77,109,0.2));
+  border: 1px solid var(--adhd-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: pulse-border 2s infinite;
+}
+
+.hyperfocus-bar.active { display: flex; }
+
+@keyframes pulse-border {
+  0%, 100% { border-color: var(--adhd-primary); }
+  50% { border-color: var(--adhd-secondary); }
+}
+
+.hyperfocus-bar button {
+  padding: 4px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.hyperfocus-icon { font-size: 1.2rem; }
+
+/* XP Card */
+.level-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.level-badge {
+  background: linear-gradient(135deg, var(--adhd-primary), var(--adhd-accent));
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.level-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.xp-bar-wrap { margin-bottom: 16px; }
+
+.xp-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--adhd-primary), var(--adhd-secondary));
+  border-radius: 50px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.xp-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.badge {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: 1.2rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: default;
+  transition: var(--transition);
+}
+
+.badge.earned {
+  background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,179,71,0.2));
+  border-color: var(--adhd-primary);
+}
+
+.badge.locked { filter: grayscale(1); opacity: 0.4; }
+
+/* Mood */
+.mood-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.mood-btn {
+  font-size: 1.6rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.mood-btn:hover, .mood-btn.selected {
+  border-color: rgba(255,255,255,0.4);
+  transform: scale(1.2);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Voice */
+.voice-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.reminders-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+/* Themes Grid */
+.themes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.theme-chip {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.theme-chip:hover { background: rgba(255,255,255,0.12); }
+.theme-chip.active { border-color: var(--adhd-primary); color: var(--adhd-primary); }
+.theme-chip.locked-theme { opacity: 0.4; cursor: not-allowed; }
+
+/* Urgency Mode */
+.urgency-card {
+  border-color: rgba(255,77,109,0.5) !important;
+  background: rgba(255,77,109,0.1) !important;
+}
+
+.urgency-header {
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--adhd-accent);
+  margin-bottom: 8px;
+}
+
+.urgency-countdown {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--adhd-accent);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.urgency-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.urgency-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #FF4D6D);
+  border-radius: 50px;
+  transition: width 1s linear;
+  width: 100%;
+}
+
+/* ══════════════ DYSLEXIA LAYOUT ══════════════ */
+.dyslexia-nav { border-bottom-color: rgba(124,92,191,0.3); }
+
+.dyslexia-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr 240px;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.dyslexia-controls-panel {
+  position: sticky;
+  top: 80px;
+}
+
+.dyslexia-main, .dyslexia-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.control-group {
+  margin-bottom: 16px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.toggle-group {
+  display: flex;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  gap: 3px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 7px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-btn.active {
+  background: rgba(255,255,255,0.12);
+  color: var(--text);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
+}
+
+.dyslexia-slider {
+  background: linear-gradient(90deg, var(--dyslexia-primary) 0%, rgba(255,255,255,0.1) 0%);
+}
+
+.dyslexia-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--dyslexia-secondary);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--dyslexia-glow);
+}
+
+.autism-slider {
+  background: linear-gradient(90deg, var(--autism-primary) 50%, rgba(255,255,255,0.1) 50%);
+}
+
+.autism-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--autism-secondary);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--autism-glow);
+}
+
+.overlay-swatches {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.swatch:hover { transform: scale(1.2); border-color: rgba(255,255,255,0.5) !important; }
+
+/* Reading Area */
+.reading-card { position: relative; }
+
+.reading-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.reading-header h3 { font-size: 0.95rem; font-weight: 700; }
+
+.reading-actions { display: flex; gap: 6px; }
+
+.reading-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text);
+  min-height: 200px;
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+.reading-text:focus { outline: none; }
+
+.reading-ruler-overlay {
+  position: absolute;
+  left: 0; right: 0;
+  height: 28px;
+  background: rgba(255, 220, 100, 0.15);
+  border-top: 1px solid rgba(255, 220, 100, 0.3);
+  border-bottom: 1px solid rgba(255, 220, 100, 0.3);
+  pointer-events: none;
+  display: none;
+  z-index: 2;
+  transition: top 0.05s;
+}
+
+/* TTS */
+.tts-controls { display: flex; gap: 8px; }
+
+.tts-btn {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(124,92,191,0.4);
+  background: rgba(124,92,191,0.1);
+  color: var(--dyslexia-secondary);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tts-btn:hover { background: rgba(124,92,191,0.2); }
+
+.tts-word-highlight {
+  background: rgba(167, 139, 250, 0.35);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* Word Prediction */
+.word-input-area { position: relative; }
+
+.word-suggestions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.word-sug-btn {
+  padding: 5px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(124,92,191,0.3);
+  background: rgba(124,92,191,0.08);
+  color: var(--dyslexia-secondary);
+  font-size: 0.82rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.word-sug-btn:hover { background: rgba(124,92,191,0.2); }
+
+/* Visual Dictionary */
+.dict-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dict-result {
+  min-height: 80px;
+  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dict-word-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--dyslexia-secondary);
+}
+
+.dict-word-type {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.dict-word-def {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Simplifier */
+.simplify-input {
+  width: 100%;
+  min-height: 100px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  resize: vertical;
+  outline: none;
+}
+
+.simplified-output {
+  min-height: 80px;
+  margin-top: 10px;
+  padding: 14px;
+  background: rgba(124,92,191,0.08);
+  border: 1px solid rgba(124,92,191,0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Chunk View */
+.chunk-display {
+  min-height: 100px;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.chunk-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Reading Stats */
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.85rem;
+}
+
+.stat-row span { color: var(--text-muted); }
+.stat-row strong { font-weight: 700; }
+
+/* Audio Notes */
+.audio-notes { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+
+.audio-note-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(124,92,191,0.08);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+/* Focus Reading Overlay */
+.focus-reading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,18,0.97);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.focus-reading-overlay.active { display: flex; }
+
+.focus-reading-content {
+  max-width: 700px;
+  width: 100%;
+}
+
+.focus-exit {
+  display: block;
+  margin-bottom: 20px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.focus-tts-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.focus-tts-bar button {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(124,92,191,0.4);
+  background: rgba(124,92,191,0.1);
+  color: var(--dyslexia-secondary);
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.focus-text {
+  font-size: 1.3rem;
+  line-height: 2;
+}
+
+/* OpenDyslexic simulation */
+.font-dyslexic .reading-text,
+.font-dyslexic .focus-text,
+.font-dyslexic .chunk-display {
+  font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════ AUTISM LAYOUT ══════════════ */
+.autism-nav { border-bottom-color: rgba(45,156,127,0.3); }
+
+.autism-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+  transition: var(--transition);
+}
+
+.autism-left, .autism-center, .autism-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Sensory Panel */
+.sensory-control {
+  margin-bottom: 16px;
+}
+
+.sensory-control label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.sensory-control span {
+  font-size: 0.78rem;
+  color: var(--autism-secondary);
+  font-weight: 600;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  width: 48px;
+  height: 26px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.toggle-switch.on { background: var(--autism-primary); }
+
+.toggle-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.3s;
+}
+
+.toggle-switch.on .toggle-thumb { transform: translateX(22px); }
+
+/* Autism Themes */
+.autism-themes {
+  display: flex;
+  gap: 8px;
+}
+
+.a-theme {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.a-theme:hover, .a-theme.active {
+  border-color: white;
+  transform: scale(1.15);
+}
+
+/* Emotion Grid */
+.emotion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.emotion-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(45,156,127,0.2);
+  background: rgba(45,156,127,0.06);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.emotion-tool:hover {
+  background: rgba(45,156,127,0.15);
+  border-color: var(--autism-primary);
+  transform: translateY(-2px);
+}
+
+.emotion-tool span { font-size: 1.5rem; }
+
+/* Visual Timer */
+.visual-timer-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 16px auto;
+}
+
+.visual-timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.vtimer-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 10;
+}
+
+.vtimer-fill {
+  fill: none;
+  stroke: var(--autism-primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.vtimer-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#vtimer-display {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--autism-primary), var(--autism-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#vtimer-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.vtimer-presets {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.vtimer-presets button {
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.vtimer-presets button:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+.vtimer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Timeline */
+.timeline {
+  padding: 8px 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.08);
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+  z-index: 1;
+}
+
+.current-dot {
+  background: var(--autism-primary);
+  border-color: var(--autism-secondary);
+  box-shadow: 0 0 12px var(--autism-glow);
+}
+
+.timeline-item.current .timeline-time { color: var(--autism-secondary); font-weight: 700; }
+
+.timeline-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  width: 65px;
+  flex-shrink: 0;
+}
+
+.timeline-task {
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.timeline-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.timeline-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--autism-primary), var(--autism-secondary));
+  border-radius: 50px;
+}
+
+/* Step Card */
+.step-display {
+  text-align: center;
+  padding: 24px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.step-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--autism-secondary);
+}
+
+.step-instruction {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.step-visual { font-size: 2.5rem; }
+
+.step-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: var(--transition);
+}
+
+.step-dot.active {
+  background: var(--autism-primary);
+  width: 24px;
+  border-radius: 50px;
+}
+
+/* Social Story */
+.card-desc {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.situation-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.story-output {
+  margin-top: 12px;
+  padding: 14px;
+  background: rgba(45,156,127,0.08);
+  border: 1px solid rgba(45,156,127,0.2);
+  border-radius: var(--radius-sm);
+  min-height: 60px;
+}
+
+.story-step {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.story-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--autism-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Conversation */
+.convo-scenario {
+  background: rgba(45,156,127,0.08);
+  border: 1px solid rgba(45,156,127,0.2);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.scenario-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--autism-secondary);
+}
+
+.convo-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.convo-msg {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+.ai-msg {
+  background: rgba(45,156,127,0.1);
+  border: 1px solid rgba(45,156,127,0.2);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.user-msg {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.convo-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.convo-opt {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(45,156,127,0.2);
+  background: rgba(45,156,127,0.05);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.convo-opt:hover {
+  background: rgba(45,156,127,0.15);
+  border-color: var(--autism-primary);
+}
+
+/* Routine AI */
+.ai-suggestions { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+
+.suggestion-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--autism-primary);
+}
+
+.sug-time {
+  font-size: 0.75rem;
+  color: var(--autism-secondary);
+  font-weight: 700;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.sug-task { font-size: 0.83rem; }
+
+/* Safe Mode Btn */
+.safe-mode-btn {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(45,156,127,0.4);
+  background: rgba(45,156,127,0.1);
+  color: var(--autism-secondary);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.safe-mode-btn.active {
+  background: var(--autism-primary);
+  border-color: var(--autism-primary);
+  color: white;
+}
+
+/* Safe Mode State */
+.safe-mode-active .autism-left,
+.safe-mode-active .autism-right {
+  display: none;
+}
+
+.safe-mode-active .autism-layout {
+  grid-template-columns: 1fr;
+}
+
+.safe-mode-active .autism-center {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ══════════════ MODALS ══════════════ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  animation: fadeOverlay 0.3s;
+}
+
+@keyframes fadeOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-box {
+  background: rgba(20,20,30,0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  animation: modalSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlide {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-box h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.modal-close:hover { background: rgba(255,255,255,0.15); color: white; }
+
+/* Breathing */
+.breathing-box { text-align: center; }
+
+.breathing-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,156,127,0.3), rgba(78,205,196,0.1));
+  border: 3px solid var(--autism-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  transition: all 0.1s;
+  cursor: pointer;
+  box-shadow: 0 0 30px var(--autism-glow);
+}
+
+.breathing-circle.inhale {
+  animation: breatheIn 4s ease-in-out;
+}
+
+.breathing-circle.exhale {
+  animation: breatheOut 4s ease-in-out;
+}
+
+@keyframes breatheIn {
+  from { transform: scale(1); box-shadow: 0 0 20px var(--autism-glow); }
+  to   { transform: scale(1.3); box-shadow: 0 0 50px var(--autism-glow); }
+}
+
+@keyframes breatheOut {
+  from { transform: scale(1.3); box-shadow: 0 0 50px var(--autism-glow); }
+  to   { transform: scale(1); box-shadow: 0 0 20px var(--autism-glow); }
+}
+
+.breathing-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--autism-secondary);
+}
+
+.breathing-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.breathing-pattern {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pattern-btn {
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(45,156,127,0.3);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pattern-btn.active {
+  background: var(--autism-primary);
+  border-color: var(--autism-primary);
+  color: white;
+}
+
+/* Grounding */
+.grounding-step { text-align: center; margin-bottom: 20px; }
+
+.grounding-number {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--autism-primary), var(--autism-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grounding-sense {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.grounding-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.grounding-inputs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+/* Meltdown Mode */
+.meltdown-overlay {
+  background: rgba(10,30,20,0.98) !important;
+}
+
+.meltdown-box {
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.meltdown-breathe {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,156,127,0.2), transparent);
+  border: 2px solid rgba(45,156,127,0.3);
+  margin: 0 auto 30px;
+  animation: meltdownPulse 4s ease-in-out infinite;
+}
+
+@keyframes meltdownPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.meltdown-message {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--autism-secondary);
+  margin-bottom: 10px;
+}
+
+.meltdown-sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+.meltdown-exit {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: 1px solid rgba(45,156,127,0.4);
+  background: rgba(45,156,127,0.15);
+  color: var(--autism-secondary);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Routine Builder */
+.routine-box { max-width: 560px; }
+
+.routine-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.routine-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.routine-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(45,156,127,0.06);
+  border: 1px solid rgba(45,156,127,0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+/* Conversation Sim Messages */
+.sim-messages {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.sim-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* ══════════════ TOAST ══════════════ */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(20,20,30,0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  backdrop-filter: blur(16px);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ══════════════ SCROLLBARS ══════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 50px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media (max-width: 1100px) {
+  .mode-cards { grid-template-columns: 1fr; }
+  .adhd-layout, .dyslexia-layout, .autism-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══════════════ ANIMATIONS ══════════════ */
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.7); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.bounce-in { animation: bounceIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* XP Pop Animation */
+@keyframes xpPop {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+}
+
+.xp-pop {
+  position: fixed;
+  color: var(--adhd-secondary);
+  font-weight: 800;
+  font-size: 1.1rem;
+  pointer-events: none;
+  animation: xpPop 0.8s ease forwards;
+  z-index: 9999;
+}
+
+/* ══════════════ DASHBOARD ══════════════ */
+.dashboard-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Welcome Banner */
+.dash-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(124,92,191,0.08), rgba(45,156,127,0.08)) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+.dash-greeting {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-family: var(--font-body);
+}
+
+.dash-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.dash-sub {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.dash-streak-big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.streak-fire { font-size: 2.5rem; }
+
+.streak-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF6B35, #FF4D6D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.streak-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Stats Row */
+.dash-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.dash-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.dstat-icon { font-size: 1.8rem; }
+
+.dstat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dstat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+.adhd-stat .dstat-val { color: var(--adhd-primary); }
+.dyslexia-stat .dstat-val { color: var(--dyslexia-secondary); }
+.autism-stat .dstat-val { color: var(--autism-secondary); }
+
+/* Main Grid */
+.dash-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Mood Card */
+.dash-mood-card { grid-column: 1 / 2; }
+
+.mood-insight-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  max-width: 200px;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.mood-log-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Progress Card */
+.dash-progress-card { grid-column: 2 / 3; }
+
+.progress-rows { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+
+.prog-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prog-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  width: 130px;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+
+.prog-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prog-pct {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 36px;
+  text-align: right;
+}
+
+/* Quick Access */
+.dash-quick-card { grid-column: 1 / 2; }
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quick-btn span { font-size: 1.5rem; }
+.quick-btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.08); }
+
+.adhd-quick { border-color: rgba(255,107,53,0.25); }
+.adhd-quick:hover { border-color: var(--adhd-primary); box-shadow: 0 6px 20px var(--adhd-glow); }
+
+.dyslexia-quick { border-color: rgba(124,92,191,0.25); }
+.dyslexia-quick:hover { border-color: var(--dyslexia-primary); box-shadow: 0 6px 20px var(--dyslexia-glow); }
+
+.autism-quick { border-color: rgba(45,156,127,0.25); }
+.autism-quick:hover { border-color: var(--autism-primary); box-shadow: 0 6px 20px var(--autism-glow); }
+
+/* Achievements */
+.dash-achievements-card { grid-column: 2 / 3; }
+
+.achievements-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: var(--transition);
+}
+
+.achievement-item.earned {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.achievement-item.locked { opacity: 0.45; }
+
+.ach-icon { font-size: 1.4rem; }
+
+.ach-info { flex: 1; }
+
+.ach-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ach-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+.ach-badge {
+  font-size: 0.85rem;
+  color: #4CAF50;
+  font-weight: 700;
+}
+
+.locked-badge { color: var(--text-muted); }
+
+@media (max-width: 900px) {
+  .dash-stats-row { grid-template-columns: 1fr 1fr; }
+  .dash-main-grid { grid-template-columns: 1fr; }
+  .dash-mood-card, .dash-progress-card,
+  .dash-quick-card, .dash-achievements-card { grid-column: 1; }
+  .dash-welcome { flex-direction: column; gap: 20px; text-align: center; }
+}
 
